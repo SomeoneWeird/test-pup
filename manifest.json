@@ -1,1 +1,47 @@
-{"meta":{"version":"0.0.3-dev"}}
+{
+  "manifestVersion": 1,
+  "meta": {
+    "name": "s1w test pup",
+    "version": "0.0.4",
+    "logoPath": null
+  },
+  "config": {},
+  "container": {
+    "build": {
+      "nixFile": "pup.nix",
+      "nixFileSha256": ""
+    },
+    "services": [
+      {
+        "name": "server1",
+        "command": {
+          "exec": "/bin/start-server1",
+          "cwd": "/bin/",
+          "env": {}
+        }
+      },
+      {
+        "name": "server2",
+        "command": {
+          "exec": "/bin/start-server2",
+          "cwd": "/bin/",
+          "env": {}
+        }
+      }
+    ],
+    "exposes": [
+      {
+        "type": "admin",
+        "trafficType": "http",
+        "port": 80
+      },
+      {
+        "type": "admin",
+        "trafficType": "http",
+        "port": 81
+      }
+    ]
+  },
+  "permissionGroups": [],
+  "dependencies": []
+}
