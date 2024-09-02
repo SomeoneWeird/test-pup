@@ -2,7 +2,7 @@
   "manifestVersion": 1,
   "meta": {
     "name": "s1w test pup",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "logoPath": null
   },
   "config": {},
@@ -15,17 +15,13 @@
       {
         "name": "server1",
         "command": {
-          "exec": "/bin/start-server1",
-          "cwd": "/bin/",
-          "env": {}
+          "exec": "/bin/server1"
         }
       },
       {
         "name": "server2",
         "command": {
-          "exec": "/bin/start-server2",
-          "cwd": "/bin/",
-          "env": {}
+          "exec": "/bin/server2"
         }
       }
     ],
@@ -33,12 +29,12 @@
       {
         "type": "admin",
         "trafficType": "http",
-        "port": 80
+        "port": 8080
       },
       {
         "type": "admin",
         "trafficType": "http",
-        "port": 81
+        "port": 8081
       }
     ]
   },

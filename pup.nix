@@ -5,18 +5,22 @@ let
     name = "server1";
     version = "1.0";
 
-    buildInputs = [ pkgs.socat ];
+    buildInputs = [ pkgs.go ];
+
+    src = ./server1;
 
     unpackPhase = "true";
 
-    installPhase = ''
+    buildPhase = ''
+      export GO111MODULE=off
+      export GOCACHE=$(pwd)/.gocache
       mkdir -p $out/bin
-      cat > $out/bin/start-server1 <<'EOF'
-#!/usr/bin/env bash
+      cd $src
+      go build -o $out/bin/server1 server.go
+    '';
 
-socat TCP-LISTEN:80,reuseaddr,fork SYSTEM:"echo -e 'HTTP/1.1 200 OK\r\nContent-Length: 11\r\nContent-Type: text/plain\r\n\r\nhello world'"
-EOF
-      chmod +x $out/bin/start-server1
+    installPhase = ''
+      echo "Binary built at $out/bin/server1"
     '';
   };
 
@@ -24,24 +28,26 @@ EOF
     name = "server2";
     version = "1.0";
 
-    buildInputs = [ pkgs.socat ];
+    buildInputs = [ pkgs.go ];
 
-    # Disable the unpackPhase as there is no source to unpack
+    src = ./server2;
+
     unpackPhase = "true";
 
-    installPhase = ''
+    buildPhase = ''
+      export GO111MODULE=off
+      export GOCACHE=$(pwd)/.gocache
       mkdir -p $out/bin
-      cat > $out/bin/start-server2 <<'EOF'
-#!/usr/bin/env bash
+      cd $src
+      go build -o $out/bin/server2 server.go
+    '';
 
-socat TCP-LISTEN:81,reuseaddr,fork SYSTEM:"echo -e 'HTTP/1.1 200 OK\r\nContent-Length: 9\r\nContent-Type: text/plain\r\n\r\nhello pup'"
-EOF
-      chmod +x $out/bin/start-server2
+    installPhase = ''
+      echo "Binary built at $out/bin/server2"
     '';
   };
 
 in
 {
-  server1 = server1;
-  server2 = server2;
+  inherit server1 server2;
 }
