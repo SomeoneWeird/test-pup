@@ -2,8 +2,10 @@
   "manifestVersion": 1,
   "meta": {
     "name": "s1w test pup",
-    "version": "0.0.6",
-    "logoPath": null
+    "version": "0.0.7",
+    "logoPath": null,
+    "shortDescription": "my little test pup",
+    "longDescription": "this pup has two services that run in it, server1 and server2. They each host a http server on port 8080 and 8081 respectively."
   },
   "config": {},
   "container": {
