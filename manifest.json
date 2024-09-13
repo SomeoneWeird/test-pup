@@ -2,12 +2,14 @@
   "manifestVersion": 1,
   "meta": {
     "name": "s1w test pup",
-    "version": "0.0.8",
-    "logoPath": null,
+    "version": "0.0.9",
+    "logoPath": "",
     "shortDescription": "my little test pup",
     "longDescription": "this pup has two services that run in it, server1 and server2. They each host a http server on port 8080 and 8081 respectively."
   },
-  "config": {},
+  "config": {
+    "sections": null
+  },
   "container": {
     "build": {
       "nixFile": "pup.nix",
@@ -17,13 +19,17 @@
       {
         "name": "server1",
         "command": {
-          "exec": "/bin/server1"
+          "exec": "/bin/server1",
+          "cwd": "",
+          "env": null
         }
       },
       {
         "name": "server2",
         "command": {
-          "exec": "/bin/server2"
+          "exec": "/bin/server2",
+          "cwd": "",
+          "env": null
         }
       }
     ],
@@ -31,15 +37,19 @@
       {
         "type": "admin",
         "trafficType": "http",
-        "port": 8080
+        "port": 8090,
+        "interfaces": null,
+        "listenOnHost": true
       },
       {
         "type": "admin",
         "trafficType": "http",
-        "port": 8081
+        "port": 8091,
+        "interfaces": null,
+        "listenOnHost": true
       }
     ]
   },
-  "permissionGroups": [],
+  "interfaces": null,
   "dependencies": []
 }
